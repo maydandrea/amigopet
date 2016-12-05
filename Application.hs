@@ -10,5 +10,5 @@ import Yesod
 
 import Person
 import Depto
-------------------
+
 mkYesodDispatch "App" resourcesApp
