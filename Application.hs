@@ -8,7 +8,7 @@ import Foundation
 import Yesod
 
 
-import Person
-import Depto
+import Pessoa
+import Login
 
 mkYesodDispatch "App" resourcesApp

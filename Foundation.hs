@@ -12,16 +12,40 @@ import Database.Persist.Postgresql
 data App = App {connPool :: ConnectionPool }
 
 share [mkPersist sqlSettings, mkMigrate "migrateAll"] [persistLowerCase|
-Person json
-    firstname Text
-    lastname Text
-    manager PersonId Maybe
-    worksin DeptoId Maybe
+
+Pet json
+    nome Text
+    raca Text
+    cor Text
+    idade Text
+    especie Text
+    idpessoa PessoaId
     deriving Show
     
-Depto json
-    name Text
-    secretary PersonId
+Pessoa json
+    nome Text
+    cpf Text
+    endereco Text
+    contato Text
+    deriving Show
+ 
+Adocao json
+    idpessoa PessoaId 
+    idpet PetId
+    UniqueAdocao idpessoa idpet
+    deriving Show
+
+Interessado json
+    idpessoa PessoaId
+    idpet PetId
+    UniqueInteressado idpessoa idpet
+    deriving Show
+    
+Login json  
+    email Text
+    senha Text
+    cdPessoa PessoaId
+    UniqueLogin email
     deriving Show
 |]
 

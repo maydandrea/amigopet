@@ -8,8 +8,8 @@ executable          amigopet
   main-is:          Main.hs
   other-modules:    Foundation
                     Application
-                    Person
-                    Depto
+                    Pessoa
+                    Login 
                     
   ghc-options:      -Wall -fwarn-tabs -O2
 
