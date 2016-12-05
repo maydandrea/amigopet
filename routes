@@ -1,1 +1,9 @@
-/   PessoaR GET
+/pessoa/inserir                 PessoaR         POST 
+/pessoa/alterar/#PessoaId       PessoaAltR      PUT
+/pessoa/listar                  PessoaListR     GET
+/pessoa/listar/#PessoaId        PessoaDadosR    GET
+
+
+
+
+
