@@ -1,0 +1,6 @@
+/person                      PersonR     POST
+/person/delete/#PersonId     DelPersonR  DELETE
+/person/update/#PersonId     UpdateR     PUT
+/people                      PeopleR     GET
+/secretary                   SecretaryR  GET
+/department                  DeptoR      POST
