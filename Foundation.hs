@@ -44,7 +44,7 @@ Interessado json
 Login json  
     email Text
     senha Text
-    cdPessoa PessoaId
+    idpessoa PessoaId
     UniqueLogin email
     deriving Show
 |]

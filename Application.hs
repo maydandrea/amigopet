@@ -9,6 +9,9 @@ import Yesod
 
 
 import Pessoa
+import Pet
+import Adocao
+import Interessado
 import Login
 
 mkYesodDispatch "App" resourcesApp
