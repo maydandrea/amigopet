@@ -1,0 +1,10 @@
+/* Empty. Add your own CSS if you like */
+.bar-header{
+    background:#EF432F !important; 
+}
+.tab-item-active{
+    color:#EF432F;
+}
+.bar-header .title, .bar-header .button-icon{
+    color:#FFFFFF !important;
+}
