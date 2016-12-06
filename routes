@@ -3,6 +3,11 @@
 /pessoa/listar                  PessoaListR     GET
 /pessoa/listar/#PessoaId        PessoaDadosR    GET
 
+/pet/inserir                    PetR            POST 
+/pet/alterar/#PetId             PetAltR         PUT
+/pet/listar                     PetListR        GET
+/pet/listar/#PetId              PetDadosR       GET
+/pet/deletar/#PetId             PetDelR         DELETE
 
 
 
