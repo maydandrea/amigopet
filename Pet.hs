@@ -41,6 +41,22 @@ getPetDadosR pid = do
                           pack "idade" .= petIdade pets,
                           pack "especie" .= petEspecie pets])
 
+
+getPetsPessoaR :: PessoaId -> Handler Html
+getPetsPessoaR pid = do
+    pets <- runDB $ selectList [PetIdpessoa ==. pid] [Asc PetId]
+    sendResponse (object [pack "resp" .= toJSON pets])
+    
+
+
+
+{-    
+     boss <- runDB $ (rawSql "SELECT ??, ?? \
+            \FROM pet \
+            \WHERE idpessoa=pessoa.id" [])::Handler [(Entity Depto, Entity Person)]
+    sendResponse (object [pack "resp" .= toJSON boss])-}
+
+
 deletePetDelR :: PetId -> Handler ()
 deletePetDelR pid = do
     runDB $ get404 pid

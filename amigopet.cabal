@@ -9,7 +9,10 @@ executable          amigopet
   other-modules:    Foundation
                     Application
                     Pessoa
-                    Login 
+                    Login
+                    Adocao
+                    Interessado
+                    Pet
                     
   ghc-options:      -Wall -fwarn-tabs -O2
 
