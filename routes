@@ -1,18 +1,23 @@
-/pessoa/inserir                 PessoaR         POST 
-/pessoa/alterar/#PessoaId       PessoaAltR      PUT
-/pessoa/listar                  PessoaListR     GET
-/pessoa/listar/#PessoaId        PessoaDadosR    GET
+/pessoa/inserir                         PessoaR                 POST 
+/pessoa/alterar/#PessoaId               PessoaAltR              PUT
+/pessoa/listar                          PessoaListR             GET
+/pessoa/listar/#PessoaId                PessoaDadosR            GET
 
-/pet/inserir                    PetR            POST 
-/pet/alterar/#PetId             PetAltR         PUT
-/pet/listar                     PetListR        GET
-/pet/listar/#PetId              PetDadosR       GET
-/pet/listarpets/#PessoaId       PetsPessoaR     GET
-/pet/deletar/#PetId             PetDelR         DELETE
+/pet/inserir                            PetR                    POST 
+/pet/alterar/#PetId                     PetAltR                 PUT
+/pet/listar                             PetListR                GET
+/pet/listar/#PetId                      PetDadosR               GET
+/pet/listarpets/#PessoaId               PetsPessoaR             GET
+/pet/deletar/#PetId                     PetDelR                 DELETE
 
-/adocao/inserir                 AdocaoR         POST
-/adocao/listar                  AdocaoListR     GET
-/adocao/deletar/#AdocaoId       AdocaoDelR      DELETE  
+/adocao/inserir                         AdocaoR                 POST
+/adocao/listar                          AdocaoListR             GET
+/adocao/listarpets/#PessoaId            AdocaoListPetsR         GET
+/adocao/deletar/#AdocaoId               AdocaoDelR              DELETE  
 
+/interessado/inserir                    InterR                  POST
+/interessado/listarpessoas/#PetId       InterListPessoasR       GET
+/interessado/listarpets/#PessoaId       InterListPetsR          GET
+/interessado/deletar/#InteressadoId     InterDelR               DELETE  
 
 

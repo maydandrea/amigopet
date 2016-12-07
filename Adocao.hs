@@ -17,6 +17,14 @@ getAdocaoListR :: Handler Html
 getAdocaoListR = do
     adoc <- runDB $ selectList [] [Desc AdocaoId]
     sendResponse (object [pack "resp" .= toJSON adoc])
+
+getAdocaoListPetsR :: PessoaId -> Handler ()
+getAdocaoListPetsR pid = do
+    pets <- runDB $ (rawSql (pack $ "SELECT ?? FROM pet \
+    \INNER JOIN adocao \
+    \ON pet.id=adocao.idpet \
+    \WHERE adocao.idpessoa=" ++ (show $ fromSqlKey pid)) []) :: Handler [(Entity Pet)]
+    sendResponse (object [pack "resp" .= toJSON pets])
     
 deleteAdocaoDelR :: AdocaoId -> Handler ()
 deleteAdocaoDelR pid = do
