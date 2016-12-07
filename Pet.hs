@@ -48,15 +48,6 @@ getPetsPessoaR pid = do
     sendResponse (object [pack "resp" .= toJSON pets])
     
 
-
-
-{-    
-     boss <- runDB $ (rawSql "SELECT ??, ?? \
-            \FROM pet \
-            \WHERE idpessoa=pessoa.id" [])::Handler [(Entity Depto, Entity Person)]
-    sendResponse (object [pack "resp" .= toJSON boss])-}
-
-
 deletePetDelR :: PetId -> Handler ()
 deletePetDelR pid = do
     runDB $ get404 pid

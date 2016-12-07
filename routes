@@ -10,6 +10,9 @@
 /pet/listarpets/#PessoaId       PetsPessoaR     GET
 /pet/deletar/#PetId             PetDelR         DELETE
 
+/adocao/inserir                 AdocaoR         POST
+/adocao/listar                  AdocaoListR     GET
+/adocao/deletar/#AdocaoId       AdocaoDelR      DELETE  
 
 
 
