@@ -32,11 +32,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.cadastrar_pessoa', {
+    url: '/cadastrar_pessoa',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/cadastrar_pessoa.html',
+        controller: 'PessoaCtrl'
       }
     }
   })

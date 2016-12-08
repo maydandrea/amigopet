@@ -8,3 +8,26 @@
 .bar-header .title, .bar-header .button-icon{
     color:#FFFFFF !important;
 }
+.ng-touched::-webkit-input-placeholder {
+   color: #000;
+}
+.ng-touched:-moz-placeholder { /* Firefox 18- */
+   color: #000;  
+}
+.ng-touched::-moz-placeholder {  /* Firefox 19+ */
+   color: #000;  
+}
+.ng-touched:-ms-input-placeholder {  
+   color: #000;  
+}
+.list-header {
+    margin: 0;
+    padding: 15px 15px;
+    background-color: #F1F1F1;
+    color: #222;
+    font-weight: bold;
+}
+button .ng-touched{
+    margin:0;
+    border-radius:0px;
+}

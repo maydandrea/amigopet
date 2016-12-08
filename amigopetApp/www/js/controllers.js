@@ -39,6 +39,81 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+  
+})
+
+.controller('PessoaCtrl', function($scope, $http) {
+    $scope.data = {};
+ 
+    $scope.cadastrar_pessoa = function() {
+     
+      var web1 = "https://haskell-maydandrea.c9users.io";
+      var web2 = "https://hask-aekelly.c9users.io";
+      var data = $scope.data;
+      
+      var json_pessoa = {
+        nome : data.nome,
+        cpf : data.cpf,
+        endereco : data.endereco,
+        contato : data.contato
+      };
+      
+      inserirPessoa(data.nome, data.cpf, data.endereco, data.contato, data.email, data.senha, web1);
+        
+    }
+    
+    function inserirPessoa(nome, cpf, endereco, contato, email, senha, ws){
+      
+      var json_pessoa = {
+        nome : nome,
+        cpf : cpf,
+        endereco : endereco,
+        contato : contato
+      };
+      
+      $http.post(ws + '/pessoa/inserir', json_pessoa, {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+      }).then(function (response){
+        
+          var pessoaId = response.data['resp'].replace('CREATED ', '');
+          inserirLogin(email, senha, eval(pessoaId), ws);
+          return pessoaId;
+        
+      });
+      
+    }
+    
+    function inserirLogin(email, senha, pessoaId, ws){
+      
+      var json_login = {
+        email : email,
+        senha : senha,
+        idpessoa : pessoaId
+      };
+      
+      $http.post(ws + '/login/inserir', json_login, {
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+      }).then(function successCallback(response){
+     
+        alert("Cadastro efetuado com sucesso!");
+        $scope.login();
+        
+      }, function errorCallback(response){
+        
+          if(response.data['error'] != undefined && response.data['error'].indexOf('23505') != -1){
+            
+            alert("E-mail já cadastrado!");
+            
+          }else{
+          
+            alert("Infelizmente não foi possível efetuar o cadastro, tente novamente mais tarde!");
+          
+          }
+        
+      });
+      
+    }
+    
 })
 
 .controller('PlaylistsCtrl', function($scope) {
