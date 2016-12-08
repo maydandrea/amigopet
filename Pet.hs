@@ -53,8 +53,8 @@ getPetsPessoaR pid = do
     sendResponse (object [pack "resp" .= toJSON pets])
     
 
-optionsPetDelR  :: Handler ()
-optionsPetDelR = do
+optionsPetDelR  :: PetId -> Handler ()
+optionsPetDelR pid = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "DELETE, OPTIONS"
 

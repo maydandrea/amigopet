@@ -7,8 +7,8 @@ import Yesod
 import Database.Persist.Postgresql
 import Data.Text
 
-optionsPessoaAltR :: Handler ()
-optionsPessoaAltR = do
+optionsPessoaAltR :: PessoaId -> Handler ()
+optionsPessoaAltR pid = do
     addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "PUT, OPTIONS"
 
