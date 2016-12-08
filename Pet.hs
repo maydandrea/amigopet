@@ -53,9 +53,14 @@ getPetsPessoaR pid = do
     sendResponse (object [pack "resp" .= toJSON pets])
     
 
+optionsPetDelR  :: Handler ()
+optionsPetDelR = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "DELETE, OPTIONS"
+
 deletePetDelR :: PetId -> Handler ()
 deletePetDelR pid = do
-    addHeader "Access-Control-Allow-Origin" "*"
+    {-addHeader "Access-Control-Allow-Origin" "*"-}
     runDB $ get404 pid
     runDB $ delete pid
     sendResponse (object [pack "resp" .= pack "DELETED!"])

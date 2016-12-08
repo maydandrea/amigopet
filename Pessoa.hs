@@ -7,6 +7,11 @@ import Yesod
 import Database.Persist.Postgresql
 import Data.Text
 
+optionsPessoaAltR :: Handler ()
+optionsPessoaAltR = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "PUT, OPTIONS"
+
 postPessoaR :: Handler ()
 postPessoaR = do
     addHeader "Access-Control-Allow-Origin" "*"
@@ -17,9 +22,9 @@ postPessoaR = do
 
 putPessoaAltR :: PessoaId -> Handler ()
 putPessoaAltR pid = do
-    addHeader "Access-Control-Allow-Origin" "*"
+    {-addHeader "Access-Control-Allow-Origin" "*"
     addHeader "Access-Control-Allow-Methods" "GET, PUT, POST, DELETE, OPTIONS"
-    addHeader "Access-Control-Allow-Headers" "Content-Type"
+    addHeader "Access-Control-Allow-Headers" "Content-Type"-}
     pers <- requireJsonBody :: Handler Pessoa
     runDB $ get404 pid
     runDB $ update pid [PessoaNome =. (pessoaNome pers)
