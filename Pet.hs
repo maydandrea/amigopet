@@ -9,6 +9,7 @@ import Data.Text
 
 postPetR :: Handler ()
 postPetR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pets <- requireJsonBody :: Handler Pet
     pid <- runDB $ insert pets
     sendResponse (object [pack "resp" .= pack ("CREATED " ++ (show $ fromSqlKey pid))])
@@ -16,6 +17,7 @@ postPetR = do
 
 putPetAltR :: PetId -> Handler ()
 putPetAltR pid = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pets <- requireJsonBody :: Handler Pet
     runDB $ get404 pid
     runDB $ update pid [PetNome =. (petNome pets)
@@ -28,12 +30,14 @@ putPetAltR pid = do
 
 getPetListR :: Handler Html
 getPetListR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pets <- runDB $ selectList [] [Asc PetId]
     sendResponse (object [pack "resp" .= toJSON pets])
 
 
 getPetDadosR :: PetId -> Handler ()
 getPetDadosR pid = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pets <- runDB $ get404 pid
     sendResponse (object [pack "nome" .= petNome pets,
                           pack  "raca" .= petRaca pets,
@@ -44,12 +48,14 @@ getPetDadosR pid = do
 
 getPetsPessoaR :: PessoaId -> Handler Html
 getPetsPessoaR pid = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pets <- runDB $ selectList [PetIdpessoa ==. pid] [Asc PetId]
     sendResponse (object [pack "resp" .= toJSON pets])
     
 
 deletePetDelR :: PetId -> Handler ()
 deletePetDelR pid = do
+    addHeader "Access-Control-Allow-Origin" "*"
     runDB $ get404 pid
     runDB $ delete pid
     sendResponse (object [pack "resp" .= pack "DELETED!"])

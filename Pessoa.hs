@@ -9,6 +9,7 @@ import Data.Text
 
 postPessoaR :: Handler ()
 postPessoaR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pers <- requireJsonBody :: Handler Pessoa
     pid <- runDB $ insert pers
     sendResponse (object [pack "resp" .= pack ("CREATED " ++ (show $ fromSqlKey pid))])
@@ -16,6 +17,7 @@ postPessoaR = do
 
 putPessoaAltR :: PessoaId -> Handler ()
 putPessoaAltR pid = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pers <- requireJsonBody :: Handler Pessoa
     runDB $ get404 pid
     runDB $ update pid [PessoaNome =. (pessoaNome pers)
@@ -27,12 +29,14 @@ putPessoaAltR pid = do
 
 getPessoaListR :: Handler Html
 getPessoaListR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pers <- runDB $ selectList [] [Asc PessoaId]
     sendResponse (object [pack "resp" .= toJSON pers])
 
 
 getPessoaDadosR :: PessoaId -> Handler ()
 getPessoaDadosR pid = do
+    addHeader "Access-Control-Allow-Origin" "*"
     pers <- runDB $ get404 pid
     sendResponse (object [pack "nome" .= pessoaNome pers,
                           pack  "cpf" .= pessoaCpf pers,
