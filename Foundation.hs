@@ -32,7 +32,7 @@ Pessoa json
 Adocao json
     idpessoa PessoaId 
     idpet PetId
-    UniqueAdocao idpessoa idpet
+    UniqueAdocao idpet
     deriving Show
 
 Interessado json
