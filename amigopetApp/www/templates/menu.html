@@ -3,7 +3,7 @@
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button></ion-nav-back-button>
       <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-gear-a" menu-toggle="left">
+        <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
         </button>
       </ion-nav-buttons>
       <ion-nav-buttons side="right">
@@ -20,9 +20,12 @@
     <ion-content>
       <ion-list>
         
-        <ion-item menu-close href="#/app/cadastrar_pessoa">Cadastrar</ion-item>
-        <ion-item menu-close href="#/app/login">Login</ion-item>
-        <ion-item menu-close href="#/app/search">Editar Perfil</ion-item>
+        <ion-item menu-close href="#/app/animais_adocao">Animais para adoção</ion-item>
+        <ion-item menu-close href="#/app/cadastrar_doacao">Doar animais</ion-item>
+        <ion-item menu-close href="#/app/meus_pets" ng-controller="DoacaoCtrl" ng-click="meus_pets()" class="ativa_logado">Meus Pets</ion-item>
+        <ion-item menu-close href="#/app/cadastrar_pessoa" class="desativa_logado">Cadastrar</ion-item>
+        <ion-item menu-close href="#/app/login" class="desativa_logado">Login</ion-item>
+        <ion-item menu-close href="#/app/editar_perfil" ng-click="getDadosPessoa()" class="ativa_logado">Editar Perfil</ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>

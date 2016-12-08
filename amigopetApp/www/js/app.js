@@ -42,20 +42,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
-  .state('app.browse', {
-      url: '/browse',
+  .state('app.editar_perfil', {
+      url: '/editar_perfil',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html'
+          templateUrl: 'templates/editar_perfil.html',
+          controller: 'AppCtrl'
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.animais_adocao', {
+      url: '/animais_adocao',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/animais_adocao.html',
+          controller: 'AnimaisAdocaoCtrl'
         }
       }
     })
@@ -63,7 +64,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/cadastrar_doacao',
       views: {
         'menuContent': {
-          templateUrl: 'templates/cadastrar_doacao.html'
+          templateUrl: 'templates/cadastrar_doacao.html',
+          controller: 'DoacaoCtrl'
+        }
+      }
+    })
+    .state('app.meus_pets', {
+      url: '/meus_pets',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/meus_pets.html',
+          controller: 'DoacaoCtrl'
         }
       }
     })
@@ -78,14 +89,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   .state('app.single', {
-    url: '/playlists/:playlistId',
+    url: '/animais_adocao/:animalId',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/animal.html',
+        controller: 'AnimalCtrl'
       }
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/animais_adocao');
 });

@@ -3,47 +3,49 @@
   <ion-content>
     
       <form ng-submit="cadastrar_pessoa()">
-      <div class="list">
+        <div class="list">
+            
+            <p class="list-header">Informações Pessoais</p>
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Nome</span>
+              <input id="nome" name="nome" type="text" class="ng-touched" placeholder="Nome" ng-model="data.nome">
+            </label>
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>CPF</span>
+              <input id="cpf" name="cpf" type="text" class="ng-touched" placeholder="CPF"  ng-model="data.cpf">
+            </label>
           
-          <p class="list-header">Informações Pessoais</p>
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Endereço</span>
+              <input id="endereco" name="endereco" type="text" class="ng-touched" placeholder="Endereço" ng-model="data.endereco">
+            </label>    
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Telefone</span>
+              <input id="contato" name="contato" type="text" class="ng-touched" placeholder="Telefone" ng-model="data.contato">
+            </label>    
+            
+            <p class="list-header">Informações de acesso</p>
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>E-mail</span>
+              <input id="email" name="email" type="text" class="ng-touched" placeholder="E-mail" ng-model="data.email">
+            </label>    
           
-          <label class="item item-input item-floating-label">
-            <span class="input-label"t>Nome</span>
-            <input id="nome" name="nome" type="text" class="ng-touched" placeholder="Nome" ng-model="data.nome">
-          </label>
-          
-          <label class="item item-input item-floating-label">
-            <span class="input-label"t>CPF</span>
-            <input id="cpf" name="cpf" type="text" class="ng-touched" placeholder="CPF"  ng-model="data.cpf">
-          </label>
-        
-          <label class="item item-input item-floating-label">
-            <span class="input-label"t>Endereço</span>
-            <input id="endereco" name="endereco" type="text" class="ng-touched" placeholder="Endereço" ng-model="data.endereco">
-          </label>    
-          
-          <label class="item item-input item-floating-label">
-            <span class="input-label"t>Telefone</span>
-            <input id="contato" name="contato" type="text" class="ng-touched" placeholder="Telefone" ng-model="data.contato">
-          </label>    
-          
-          <p class="list-header">Informações de acesso</p>
-          
-          <label class="item item-input item-floating-label">
-            <span class="input-label"t>E-mail</span>
-            <input id="email" name="email" type="text" class="ng-touched" placeholder="E-mail" ng-model="data.email">
-          </label>    
-        
-          <label class="item item-input item-floating-label">
-            <span class="input-label"t>Senha</span>
-            <input id="senha" name="senha" type="password" class="ng-touched" placeholder="Senha" ng-model="data.senha">
-          </label>
-          
-          <label class="item">
-            <button class="button button-block button-positive" type="submit">Cadastrar</button>
-          </label>
-          
-      </div>
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Senha</span>
+              <input id="senha" name="senha" type="password" class="ng-touched" placeholder="Senha" ng-model="data.senha">
+            </label>
+            
+            <label class="item">
+              <button class="button button-block button-positive" type="submit">Cadastrar</button>
+            </label>
+            
+        </div>
+      </form>
     
   </ion-content>
+  
 </ion-view>

@@ -1,19 +1,41 @@
-<ion-view view-title="Cadastrar Doação">
+<ion-view view-title="Cadastrar Pet" ng-controller="DoacaoCtrl">
   <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Entre</button>
-        </label>
-      </div>
-    </form>
+    <form ng-submit="cadastrar_doacao()">
+        <div class="list">
+            
+            <p class="list-header">Informações do Pet</p>
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Nome</span>
+              <input id="nome_animal" name="nome_animal" type="text" class="ng-touched" placeholder="Nome" ng-model="data.nome_animal">
+            </label>
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Raça</span>
+              <input id="raca" name="raca" type="text" class="ng-touched" placeholder="Raça"  ng-model="data.raca">
+            </label>
+          
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Cor</span>
+              <input id="cor" name="cor" type="text" class="ng-touched" placeholder="Cor" ng-model="data.cor">
+            </label>    
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Idade</span>
+              <input id="idade" name="idade" type="text" class="ng-touched" placeholder="Idade" ng-model="data.idade">
+            </label>    
+            
+            <label class="item item-input item-floating-label">
+              <span class="input-label"t>Espécie</span>
+              <input id="especie" name="especie" type="text" class="ng-touched" placeholder="Espécie" ng-model="data.especie">
+            </label>    
+            
+            <label class="item">
+              <button class="button button-block button-positive" type="submit">Cadastrar</button>
+            </label>
+            
+        </div>
+      </form>
   </ion-content>
+
 </ion-view>
