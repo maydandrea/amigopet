@@ -20,4 +20,5 @@
 /interessado/listarpets/#PessoaId       InterListPetsR          GET
 /interessado/deletar/#InteressadoId     InterDelR               DELETE  
 
-/login                                  LoginR                  POST
+/login/inserir                          LoginR                  POST
+/login/#Text/#Text                      LoginPessoaR            GET

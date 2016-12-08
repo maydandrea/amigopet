@@ -9,12 +9,14 @@ import Data.Text
 
 postLoginR :: Handler ()
 postLoginR = do
+    addHeader "Access-Control-Allow-Origin" "*"
     log <- requireJsonBody :: Handler Login
     lid <- runDB $ insert log
     sendResponse (object [pack "resp" .= pack ("CREATED " ++ (show $ fromSqlKey lid))])
 
-{-getLoginR :: LoginId -> Handler ()
-getLoginR lid = do
-    log <- runDB $ get404 lid
-    sendResponse (object [pack "email" .= loginEmail log,
-                          pack  "senha" .= loginSenha log])-}
+getLoginPessoaR :: Text -> Text -> Handler Html
+getLoginPessoaR em se = do
+    addHeader "Access-Control-Allow-Origin" "*"
+    res <- runDB $ getBy404 (UniqueLogin em)
+    sendResponse (object [  pack "senha" .= loginSenha (entityVal res),
+                            pack "lid" .= fromSqlKey ((entityKey res)) ])
