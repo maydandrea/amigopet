@@ -18,5 +18,4 @@ getLoginPessoaR :: Text -> Text -> Handler Html
 getLoginPessoaR em se = do
     addHeader "Access-Control-Allow-Origin" "*"
     res <- runDB $ getBy404 (UniqueLogin em)
-    sendResponse (object [  pack "senha" .= loginSenha (entityVal res),
-                            pack "lid" .= fromSqlKey ((entityKey res)) ])
+    sendResponse (object [  pack "pid" .= loginIdpessoa (entityVal res)])
