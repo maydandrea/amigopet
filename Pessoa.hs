@@ -18,6 +18,7 @@ postPessoaR = do
 putPessoaAltR :: PessoaId -> Handler ()
 putPessoaAltR pid = do
     addHeader "Access-Control-Allow-Origin" "*"
+    addHeader "Access-Control-Allow-Methods" "PUT, OPTIONS"
     pers <- requireJsonBody :: Handler Pessoa
     runDB $ get404 pid
     runDB $ update pid [PessoaNome =. (pessoaNome pers)
