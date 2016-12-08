@@ -8,6 +8,11 @@ angular.module('starter.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
+  
+  //VARIÁVEIS INCIAIS
+  //$scope.web = "https://haskell-maydandrea.c9users.io";
+  $scope.web = "https://hask-aekelly.c9users.io";
+  $scope.pid = null;
 
   // Form data for the login modal
   $scope.loginData = {};
@@ -28,27 +33,38 @@ angular.module('starter.controllers', [])
   $scope.login = function() {
     $scope.modal.show();
   };
-
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
   
+})
+
+.controller('LoginCtrl', function($scope, $http) {
+  $scope.data = {};
+  
+  $scope.logar = function() {
+  
+    var url = $scope.web + '/login/' + $scope.data.email + '/' + $scope.data.senha;
+    
+    $http.get(url, {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+    }).then(function (response){
+      
+        $scope.pid = response.data['pid'];
+        window.location = "#/app/playlists";
+      
+    }, function errorCallback(response){
+        
+        alert("E-mail ou senha incorretos!");
+        
+      });
+    
+  }
+
 })
 
 .controller('PessoaCtrl', function($scope, $http) {
     $scope.data = {};
  
     $scope.cadastrar_pessoa = function() {
-     
-      var web1 = "https://haskell-maydandrea.c9users.io";
-      var web2 = "https://hask-aekelly.c9users.io";
+  
       var data = $scope.data;
       
       var json_pessoa = {
@@ -58,7 +74,7 @@ angular.module('starter.controllers', [])
         contato : data.contato
       };
       
-      inserirPessoa(data.nome, data.cpf, data.endereco, data.contato, data.email, data.senha, web1);
+      inserirPessoa(data.nome, data.cpf, data.endereco, data.contato, data.email, data.senha, $scope.web);
         
     }
     
