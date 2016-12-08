@@ -56,7 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       views: {
         'menuContent': {
           templateUrl: 'templates/animais_adocao.html',
-          controller: 'AnimaisAdocaoCtrl'
+          controller: 'DoacaoCtrl'
         }
       }
     })
@@ -78,6 +78,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+    .state('app.adocoes_candidatadas', {
+      url: '/adocoes_candidatadas',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/adocoes_candidatadas.html',
+          controller: 'DoacaoCtrl'
+        }
+      }
+    })
     .state('app.login', {
       url: '/login',
       views: {
@@ -86,17 +95,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           controller: 'LoginCtrl'
         }
       }
-    })
-
-  .state('app.single', {
-    url: '/animais_adocao/:animalId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/animal.html',
-        controller: 'AnimalCtrl'
-      }
-    }
-  });
+    });
+    
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/animais_adocao');
+  $urlRouterProvider.otherwise('/app/login');
 });

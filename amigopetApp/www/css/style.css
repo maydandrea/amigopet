@@ -46,3 +46,6 @@ button .ng-touched{
 a{
     text-decoration: none;
 }
+.bar-stable .button.button-clear{
+    color:#FFF;
+}

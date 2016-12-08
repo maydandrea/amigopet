@@ -10,15 +10,22 @@ angular.module('starter.controllers', [])
   //});
   
   //VARIÁVEIS INCIAIS
-  //$scope.web = "https://haskell-maydandrea.c9users.io";
-  $scope.web = "https://hask-aekelly.c9users.io";
-  $rootScope.pid = null;
+  $scope.web = "https://haskell-maydandrea.c9users.io";
+  //$scope.web = "https://hask-aekelly.c9users.io";
+  //$rootScope.pid = null;
   
-  angular.element( document.querySelector('.ativa_logado')).addClass('hide');
+  $('.desativa_logado').each(function(){
+    $(this).removeClass('hide');
+  });
+  $('.ativa_logado').each(function(){
+    $(this).addClass('hide');
+  });
+  
+  $('#animais_adocao').click();
   
   $scope.getDadosPessoa = function(){
     
-    var url = $scope.web + '/pessoa/listar/' + $scope.pid;
+    var url = $scope.web + '/pessoa/listar/' + $rootScope.pid;
       
     $http.get(url, {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
@@ -48,10 +55,25 @@ $scope.editarDadosPessoa = function(){
     
     var url = $scope.web + '/pessoa/alterar/' + $rootScope.pid;
     
-    $http({
+    $http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+    $http.defaults.headers.put['dataType'] = 'json';
+    $http.put(url, json_pessoa)
+    .success(function(response){
+      
+    })
+    .error(function(data, status, header){
+      console.log( status);
+
+    });
+    
+    
+    /**$http({
       method: 'PUT',
       url: url,
-      headers: {"Content-Type": "application/x-www-form-urlencoded"},
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin" : "self"
+      },
       data: json_pessoa
     }).then(function (response){
       
@@ -61,7 +83,7 @@ $scope.editarDadosPessoa = function(){
         
       alert("Não foi possível efetuar as alterações!");
       
-    });
+    }); **/
     
   }
   
@@ -80,8 +102,12 @@ $scope.editarDadosPessoa = function(){
       
         $rootScope.pid = response.data['pid'];
         
-        $('.desativa_logado').addClass('hide');
-        $('.ativa_logado').removeClass('hide');
+        $('.desativa_logado').each(function(){
+          $(this).addClass('hide');
+        });
+        $('.ativa_logado').each(function(){
+          $(this).removeClass('hide');
+        });
 
         window.location = "#/app/animais_adocao";
       
@@ -92,7 +118,22 @@ $scope.editarDadosPessoa = function(){
       });
     
   }
-
+  
+  $scope.logout = function() {
+  
+    $rootScope.pid = null;
+    
+    $('.desativa_logado').each(function(){
+      $(this).removeClass('hide');
+    });
+    $('.ativa_logado').each(function(){
+      $(this).addClass('hide');
+    });
+    
+    window.location = '#/app/animais_doacao';
+    
+  }
+  
 })
 
 .controller('PessoaCtrl', function($scope, $http) {
@@ -173,7 +214,7 @@ $scope.editarDadosPessoa = function(){
   $scope.excluir_pet = function(petId){
 
     $http.delete($scope.web + '/pet/deletar/' + petId, {
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+      headers: {'Content-Type': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}  
     }).then(function successCallback(response){
 
       alert('Pet excluído com sucesso!');
@@ -186,13 +227,18 @@ $scope.editarDadosPessoa = function(){
   $scope.meus_pets = function(){
 
     var data = $scope.data;
-    $http.get($scope.web + '/pet/listarpets/' + $scope.pid, {
+    $http.get($scope.web + '/pet/listarpets/' + $rootScope.pid, {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
     }).then(function successCallback(response){
 
       var str = [];
    
       if(response.data['resp'].length > 0){
+
+        var hide = "";
+        
+        if($rootScope.pid == null)
+          hide = "hide";
 
         for(var i = 0; i < response.data['resp'].length; i++){
           
@@ -205,7 +251,7 @@ $scope.editarDadosPessoa = function(){
           str.push('</a>');
           str.push('</div>');
           str.push('<div style="width:15%; float:right;">');
-          str.push('<button class="button button-block button-assertive" ng-controller="DoacaoCtrl" ng-click="excluir_pet(' + response.data['resp'][i]['id'] + ')"><i class="icon ion-ios-trash"></i></button>');
+          str.push('<button class="button button-block button-assertive ' + hide + ' ativa_logado" ng-controller="DoacaoCtrl" ng-click="excluir_pet(' + response.data['resp'][i]['id'] + ')"><i class="icon ion-ios-trash"></i></button>');
           str.push('</div>');
           str.push('</ion-item>');
           
@@ -224,6 +270,129 @@ $scope.editarDadosPessoa = function(){
       
       str = str.join('');
       $('.meus_pets_field').html($compile(str)($scope));
+      
+    });
+  
+  }
+  
+  $scope.pets_candidatados = function(){
+
+    var data = $scope.data;
+    $http.get($scope.web + '/adocao/listarpets/' + $rootScope.pid, {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+    }).then(function successCallback(response){
+
+      var str = [];
+   
+      if(response.data['resp'].length > 0){
+
+        var hide = "";
+        
+        if($rootScope.pid == null)
+          hide = "hide";
+
+        for(var i = 0; i < response.data['resp'].length; i++){
+          
+          str.push('<ion-item>');
+          str.push('<div style="width:85%; float:left;">');
+          str.push('<a href="#/app/animais_adocao/' + response.data['resp'][i]['id']  + '">');
+          str.push('<h3>' + response.data['resp'][i]['nome']  + '</h3>');
+          str.push('<p>' + response.data['resp'][i]['raca']  + '</p>');
+          str.push('<p>' + response.data['resp'][i]['especie']  + '</p>');
+          str.push('</a>');
+          str.push('</div>');
+          str.push('<div style="width:15%; float:right;">');
+          str.push('<button class="button button-block button-assertive ' + hide + ' ativa_logado" ng-controller="DoacaoCtrl" ng-click="excluir_candidatura_pet(' + response.data['resp'][i]['id'] + ')"><i class="icon ion-ios-trash"></i></button>');
+          str.push('</div>');
+          str.push('</ion-item>');
+          
+        }
+        
+      }else{
+
+          str.push('<ion-item>');
+          str.push('<div class="msg_vazio">');
+          str.push('<h4>Você não se candidatou a nenhum animal!</h4>');
+          str.push('</div>');
+          str.push('</div>');
+          str.push('</ion-item>');
+        
+      }
+      
+      str = str.join('');
+      $('.pets_candidatados_field').html($compile(str)($scope));
+      
+    });
+  
+  }
+
+$scope.candidatar_pet = function(petId){
+
+    var json_adocao = {
+      idpessoa : $rootScope.pid,
+      idpet : petId
+    }
+
+    $http.post($scope.web + '/adocao/inserir', json_adocao,{
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+    }).then(function successCallback(response){
+    
+      alert('Parabéns, você se candidatou para ser o dono deste animal, caso seja escolhido o doador entrerá em contato.');
+    
+    }, function errorCallback(response){
+      
+      alert("Você já está candidatado a esta adoção.");
+      
+    });
+    
+}
+  
+$scope.animais_adocao = function(){
+
+    var data = $scope.data;
+    $http.get($scope.web + '/pet/listar', {
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
+    }).then(function successCallback(response){
+
+      var str = [];
+   
+      if(response.data['resp'].length > 0){
+        
+        var hide = "";
+        
+        if($rootScope.pid == null)
+          hide = "hide";
+        
+        for(var i = 0; i < response.data['resp'].length; i++){
+          
+          str.push('<ion-item>');
+          str.push('<div style="width:85%; float:left;">');
+          str.push('<a href="#/app/animais_adocao/' + response.data['resp'][i]['id']  + '">');
+          str.push('<h3>' + response.data['resp'][i]['nome']  + '</h3>');
+          str.push('<p>' + response.data['resp'][i]['raca']  + '</p>');
+          str.push('<p>' + response.data['resp'][i]['especie']  + '</p>');
+          str.push('</a>');
+          str.push('</div>');
+          str.push('<div style="width:15%; float:right;">');
+          str.push('<button class="button button-block button-positive '+ hide +' ativa_logado" ng-controller="DoacaoCtrl" ng-click="candidatar_pet(' + response.data['resp'][i]['id'] + ')"><i class="icon ion-heart"></i></button>');
+          str.push('</div>');
+          str.push('</ion-item>');
+          
+        }
+        
+      }else{
+
+          str.push('<ion-item>');
+          str.push('<div class="msg_vazio">');
+          str.push('<h4>Não existe animais para adoção!</h4>');
+          str.push('</div>');
+          str.push('</div>');
+          str.push('</ion-item>');
+        
+      }
+      
+      str = str.join('');
+      $('.animais_field').html($compile(str)($scope));
       
     });
   
@@ -256,24 +425,3 @@ $scope.editarDadosPessoa = function(){
   }
   
 })
-
-.controller('AnimaisAdocaoCtrl', function($scope, $rootScope) {
-  $scope.animais = [
-    { title: 'Max', subtitle: 'Labrador', location: 'Santos - SP', id: 1 },
-    { title: 'Max', subtitle: 'Labrador', location: 'Santos - SP', id: 2 },
-    { title: 'Max', subtitle: 'Labrador', location: 'Santos - SP', id: 3 },
-    { title: 'Max', subtitle: 'Labrador', location: 'Santos - SP', id: 4 },
-    { title: 'Max', subtitle: 'Labrador', location: 'Santos - SP', id: 5 },
-    { title: 'Max', subtitle: 'Labrador', location: 'Santos - SP', id: 6 }
-  ];
-  
-  $scope.redirect = function(url){
-    
-    $rootScope.pid != null ? window.location = "#/app/editar_perfil" : window.location = "#/app/login";
-    
-  }
-  
-})
-
-.controller('AnimalCtrl', function($scope, $stateParams) {
-});

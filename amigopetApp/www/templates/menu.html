@@ -6,7 +6,7 @@
         <button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
         </button>
       </ion-nav-buttons>
-      <ion-nav-buttons side="right">
+      <ion-nav-buttons side="right" class="ativa_logado">
         <a class="button button-icon button-clear ion-compose" href="#/app/cadastrar_doacao"></a>
       </ion-nav-buttons>
     </ion-nav-bar>
@@ -20,12 +20,14 @@
     <ion-content>
       <ion-list>
         
-        <ion-item menu-close href="#/app/animais_adocao">Animais para adoção</ion-item>
-        <ion-item menu-close href="#/app/cadastrar_doacao">Doar animais</ion-item>
+        <ion-item id="animais_adocao" menu-close href="#/app/animais_adocao" ng-controller="DoacaoCtrl" ng-click="animais_adocao()">Animais para adoção</ion-item>
+        <ion-item menu-close href="#/app/cadastrar_doacao" class="ativa_logado">Doar animais</ion-item>
         <ion-item menu-close href="#/app/meus_pets" ng-controller="DoacaoCtrl" ng-click="meus_pets()" class="ativa_logado">Meus Pets</ion-item>
+        <ion-item menu-close href="#/app/adocoes_candidatadas" ng-controller="DoacaoCtrl" ng-click="pets_candidatados()" class="ativa_logado">Adoções candidatadas</ion-item>
         <ion-item menu-close href="#/app/cadastrar_pessoa" class="desativa_logado">Cadastrar</ion-item>
         <ion-item menu-close href="#/app/login" class="desativa_logado">Login</ion-item>
         <ion-item menu-close href="#/app/editar_perfil" ng-click="getDadosPessoa()" class="ativa_logado">Editar Perfil</ion-item>
+        <ion-item menu-close href="#/app/animais_doacao" ng-controller="LoginCtrl" ng-click="logout()" class="ativa_logado">Logout</ion-item>
       </ion-list>
     </ion-content>
   </ion-side-menu>
