@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $rootScope) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $rootScope, $location, $state, $ionicHistory) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -45,8 +45,44 @@ angular.module('starter.controllers', [])
   }
   
 $scope.editarDadosPessoa = function(){
+  
+var json_pessoa = {
+      nome : $('#pessoaNome').val(),
+      cpf : $('#pessoaCpf').val(),
+      endereco : $('#pessoaEndereco').val(),
+      contato : $('#pessoaContato').val()
+    };
     
-    var json_pessoa = {
+    var url = $scope.web + '/pessoa/alterar/' + $rootScope.pid;
+    
+    /*$http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+    $http.defaults.headers.put['dataType'] = 'json';
+    $http.put(url, json_pessoa)
+    .success(function(response){
+      
+    })
+    .error(function(data, status, header){
+      console.log( status);
+
+    });*/
+    
+    if(confirm("Tem certeza que deseja fazer a alteração?")){
+    
+      $http({
+        method: 'PUT',
+        url: url,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        /*headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          "Access-Control-Allow-Origin" : "self"
+        },*/
+        data: json_pessoa
+      });
+      
+      $state.go('app.animais_adocao');
+  
+    }
+    /**var json_pessoa = {
       nome : $scope.pessoaNome,
       cpf : $scope.pessoaCpf,
       endereco : $scope.pessoaEndereco,
@@ -83,8 +119,8 @@ $scope.editarDadosPessoa = function(){
         
       alert("Não foi possível efetuar as alterações!");
       
-    }); **/
-    
+    }); 
+   **/ 
   }
   
 })
@@ -218,7 +254,12 @@ $scope.editarDadosPessoa = function(){
     }).then(function successCallback(response){
 
       alert('Pet excluído com sucesso!');
-      $scope.meus_pets();
+      
+      setTimeout($scope.meus_pets(), 1000);
+      
+    }, function errorCallback(response){
+      
+      alert("Você não pode excluir este pet pois existe(m) pessoa(s) candidatada(s).");
       
     });
   
@@ -278,7 +319,7 @@ $scope.editarDadosPessoa = function(){
   $scope.pets_candidatados = function(){
 
     var data = $scope.data;
-    $http.get($scope.web + '/adocao/listarpets/' + $rootScope.pid, {
+    $http.get($scope.web + '/interessado/listarpets/' + $rootScope.pid, {
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
     }).then(function successCallback(response){
 
@@ -333,7 +374,7 @@ $scope.candidatar_pet = function(petId){
       idpet : petId
     }
 
-    $http.post($scope.web + '/adocao/inserir', json_adocao,{
+    $http.post($scope.web + '/interessado/inserir', json_adocao,{
       headers: {'Content-Type': 'application/x-www-form-urlencoded'}  
     }).then(function successCallback(response){
     
